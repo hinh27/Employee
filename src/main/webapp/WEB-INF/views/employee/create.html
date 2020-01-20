@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới nhân viên</title>
+    <style>
+        body{
+            min-height: 100vh;
+            background-image: linear-gradient(120deg,#3498db,#8e44ad);
+        }
+        .content-table {
+            background-color: #ffffff;
+            margin: 10px 0;
+            font-size: 0.9em;
+            min-width: 500px;
+            border-radius: 10px ;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+
+
+        .content-table td {
+            padding: 5px 12px;
+        }
+.ce {
+
+    width: 360px;
+    height: 580px;
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.add{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background:#009879 ;
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+
+}
+        .delete{
+            display: block;
+            width: 100%;
+            height: 50px;
+            border: none;
+            background: crimson ;
+            background-size: 200%;
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            transition: .5s;
+
+        }
+        .chu{
+            font-size: 0.8cm;
+
+        }
+        input[type=text],input[type=date], select {
+            width: 100%;
+            padding: 8px 16px;
+            display: inline-list-item;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form class="ce" th:action="@{/create-employee}" th:object="${employee}" method="post">
+
+    <table class="content-table">
+       <td class="chu">Create employee</td>
+
+        <tr>
+            <td>Mã nhân viên:</td>
+            <td><input type="text" th:field="*{employeeId}"/></td>
+            <td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}">EmployeeId Error</td>
+        </tr>
+        <tr>
+            <td>Chức vụ:</td>
+            <td>
+                <select th:field="*{department}">
+                    <option th:each="p : ${departments}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Họ tên:</td>
+            <td><input    type="text" th:field="*{name}"/></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Ngày sinh:</td>
+            <td><input type="date"  th:field="*{dateOfBirth}"/></td>
+            <td th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">DateOfBirth Error</td>
+        </tr>
+        <tr>
+            <td>Giới tính:</td>
+            <td>
+
+                <input type="radio" name="gender" th:field="*{gender}" value="Nam">Male
+                <input type="radio" name="gender" th:field="*{gender}" value="Nữ">Female
+                <input type="radio" name="gender" th:field="*{gender}" value="BD">Other
+             </td>
+            <td th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</td>
+        </tr>
+        <tr>
+            <td>Số điện thoại:</td>
+            <td><input type="text" th:field="*{numberPhone}"/></td>
+            <td th:if="${#fields.hasErrors('numberPhone')}" th:errors="*{numberPhone}">NumberPhone Error</td>
+        </tr>
+        <tr>
+            <td>Số CMND:</td>
+            <td><input type="text" th:field="*{personId}"/></td>
+            <td th:if="${#fields.hasErrors('personId')}" th:errors="*{personId}">PersonId Error</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}"/></td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+        </tr>
+        <tr>
+            <td>Địa chỉ:</td>
+            <td><input type="text" th:field="*{address}"/></td>
+            <td th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit"class="add" value="Add">
+            </td>
+            <td>
+                <button><a href="/employees">Thoát</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

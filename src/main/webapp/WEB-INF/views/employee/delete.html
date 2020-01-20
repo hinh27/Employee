@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xóa nhân viên</title>
+</head>
+<body>
+<h1>Delete employee</h1>
+
+<form th:action="@{/delete-employee}" th:object="${employee}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Tên nhân viên:</td>
+            <td th:text="${employee.name}"></td>
+        </tr>
+        <tr>
+            <td>Chức vụ:</td>
+            <td th:text="${employee.department.name}"></td>
+        </tr>
+        <tr>
+            <td>Số điện thoại:</td>
+            <td th:text="${employee.dateOfBirth}"></td>
+        </tr>
+        <tr>
+            <td> Giới tính:</td>
+            <td th:text="${employee.gender}"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Xóa nhân viên"></td>
+            <td>
+                <button><a href="/employees">Thoát</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

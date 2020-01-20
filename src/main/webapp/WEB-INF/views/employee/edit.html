@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa nhân viên</title>
+    <style>
+        body{
+            min-height: 100vh;
+            background-image: linear-gradient(120deg,#3498db,#8e44ad);
+        }
+        .content-table {
+            background-color: #ffffff;
+            margin: 10px 0;
+            font-size: 0.9em;
+            min-width: 500px;
+            border-radius: 10px ;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+
+
+        .content-table td {
+            padding: 5px 12px;
+        }
+        .ce {
+
+            width: 360px;
+            height: 580px;
+            padding: 80px 40px;
+            border-radius: 10px;
+            position: absolute;
+            left: 45%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .add{
+            display: block;
+            width: 100%;
+            height: 50px;
+            border: none;
+            background:#009879 ;
+            background-size: 200%;
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            transition: .5s;
+
+        }
+        .delete{
+            display: block;
+            width: 100%;
+            height: 50px;
+            border: none;
+            background: crimson ;
+            background-size: 200%;
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            transition: .5s;
+
+        }
+        .chu{
+            font-size: 0.8cm;
+
+        }
+        input[type=text],input[type=date], select {
+            width: 100%;
+            padding: 8px 16px;
+            display: inline-list-item;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form class="ce"  th:action="@{/edit-employee}" th:object="${employee}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}" placeholder="Enter ID">
+    <table class="content-table">
+        <td class="chu">Edit employee</td>
+        <tr>
+            <td>Mã nhân viên:</td>
+            <td><input type="text" th:field="*{employeeId}"  /></td>
+        </tr>
+        <tr>
+            <td>Chọn nhóm nhân viên:</td>
+            <td>
+                <select name="department">
+                    <option th:each="p : ${departments}"
+                            th:value="${p.id}"
+                            th:text="${p.name}"
+                            th:selected="(${p.id} == *{department.id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Họ tên:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Ngày sinh:</td>
+            <td><input type="text" th:field="*{dateOfBirth}" placeholder="yyyy-mm-dd"/></td>
+        </tr>
+        <tr>
+            <td>Giới tính:</td>
+            <td>
+                <input type="radio" name="gender" th:field="*{gender}" value="Nam">Nam
+                <input type="radio" name="gender" th:field="*{gender}" value="Nữ">Nữ
+            </td>
+        </tr>
+        <tr>
+            <td>Số điện thoại:</td>
+            <td><input type="text" th:field="*{numberPhone}"/></td>
+        </tr>
+        <tr>
+            <td>Số CMND:</td>
+            <td><input type="text" th:field="*{personId}"/></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}"/></td>
+        </tr>
+        <tr>
+            <td>Địa chỉ:</td>
+            <td><input type="text" th:field="*{address}"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit"  class="add"  value="Update"></td>
+            <td>
+                <button><a href="/employees" class="delete">Thoát</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

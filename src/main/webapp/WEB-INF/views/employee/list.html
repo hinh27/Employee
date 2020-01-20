@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách nhân viên</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<style>
+    body{
+        min-height: 100vh;
+        background-image: linear-gradient(120deg,#3498db,#8e44ad);
+
+    }
+    .content-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        left: 50%;
+        top: 50%;
+        font-size: 0.9em;
+        min-width: 400px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        width: 25cm;
+    }
+
+    .content-table thead tr {
+
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 12px 15px;
+    }
+
+    .content-table tbody tr:nth-of-type(odd) {
+        background-color:#f3f3f3;
+    }
+
+    .content-table tbody tr:nth-of-type(even) {
+        background-color:#ffffff;
+    }
+.active-row{
+    background-color: #f3f3f3;
+}
+    h1 {
+        color: white;
+        text-align: center;
+        text-shadow: 3px 2px black;
+    }
+    .content-table tr:hover {background-color: #ddd;}
+
+
+</style>
+<body>
+
+<h1>Create employee</h1>
+<form class="ce">
+   <button><a href="/create-employee"> <i class="fa fa-plus-square"></i>Thêm mới</a></button>
+    <input name="s" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<br/>
+<table class="content-table">
+    <tr class="active-row">
+        <th>Mã nhân viên</th>
+        <th>Nhóm nhân viên</th>
+        <th>Họ tên</th>
+        <th>Giới tính</th>
+        <th>Số điện thoại</th>
+        <th>Chức năng</th>
+    </tr>
+    <th:block th:each="em : ${employees}">
+        <tr>
+            <td th:text="${em.employeeId}"></td>
+            <td th:text="${em.department.name}"></td>
+            <td th:text="${em.name}"></td>
+            <td th:text="${em.gender}"></td>
+            <td th:text="${em.numberPhone}"></td>
+            <td>
+                <a th:href="@{/edit-employee/__${em.id}__ }"><button><i class="fa fa-edit"></i></button></a>
+                <a th:href="@{/delete-employee/__${em.id}__ }"><button><i class="fa fa-trash"></i></button></a>
+            </td>
+        </tr>
+    </th:block>
+</table>
+<!--<div>-->
+<!--    <a th:href="@{'/employees'(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}">Quay lại</a>-->
+<!--    <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>-->
+<!--    <a th:href="@{'/employees'(page=${employees.number + 1})}" th:if="${employees.hasNext()}">Tiếp</a>-->
+<!--</div>-->
+</body>
+</html>
